@@ -20,15 +20,13 @@ class operations:
     # this is Insertion sort function        
     def Insertion_Sort (self):
         MyList = self.lis
-        for i in range(len(MyList)-1):   
-            if (MyList[i]>MyList[i+1]):
-                MyList = self.swap(MyList,i,i+1)
-                for j in range(i):
-                    if(MyList[i-j-1]>MyList[i-j]):
-                        MyList = self.swap(MyList,i-j,i-j-1)
-                    else:
-                        break    
-                    j+=1                   
+        for i in range(1 , len(MyList)):   
+            temp = MyList[i]
+            j = i
+            while(j > 0 and MyList[j-1]>temp )   :
+                MyList[j] = MyList [j -1]
+                j -= 1
+            MyList[j] = temp                
         return MyList
     
     #<------------------------------------------>    
@@ -36,17 +34,16 @@ class operations:
     # this is Shell sort function 
     def Shell_Sort(self):
         MyList = self.lis
-        N = len(self.lis)
-        interval = N // 2
-        while (interval > 0 ):
-            for i in range(interval,N):
+        gap =len(MyList) // 2
+        while(gap > 0):
+            for i in range(gap , len(MyList)):   
                 temp = MyList[i]
                 j = i
-                while j >= interval and MyList[j - interval] > temp:
-                    MyList[j] = MyList[j - interval]
-                    j -= interval
-                MyList[j] = temp
-            interval = interval // 2          
+                while(j >= gap and MyList[j-gap]>temp )   :
+                    MyList[j] = MyList [j -gap]
+                    j -= gap
+                MyList[j] = temp     
+            gap = gap // 2                
         return MyList
     
     #<------------------------------------------>  

@@ -79,30 +79,37 @@ class operations:
         key = int(input("Enter the roll  number you want to search\n")) 
         print("!! The list of roll numbers is being sorted !!")
         data = self.Insertion_Sort(self.lis)
+        off = -1 
+
         fm = 1
         fm1 = 1
         fm2 = 0
-        off = 0
-        while(fm < len(data)):
-            fm2 = fm1
-            fm1 = fm
+
+        n = len(data)
+
+        while(fm < n ):
+            fm2 = fm1 
+            fm1 = fm 
             fm = fm1 + fm2
-        while(fm > 1) :
-            i = min(off + fm2-1, len(data))
-            if data[i] < key:
-                fm = fm1
-                fm1 = fm2
-                fm2 = fm - fm1
-                off = i + 1
-            elif data[i] > key:
-                fm = fm1
-                fm1 = fm1 - fm2
-                fm2 = fm - fm1
-            else:
-                return  "ELEMENT FOUND \nLocation - "+str(i)+"\n(When the list is sorted)\n"
-        if (fm1) and (data[len(data) - 1] == key):
-            return "ELEMENT FOUND \nLocation - "+str(len(data) - 1)+"\n(When the list is sorted)\n"
-        return "ELEMENT NOT IN LIST"       
+
+        while(fm > 1):
+            i = min(off+ fm2 , n - 1)
+            if(data[i]<key):
+                fm = fm1 
+                fm1 = fm2 
+                fm2 = fm - fm1 
+                off = i 
+            elif(data[i]>key):
+                fm = fm2 
+                fm1 = fm1 - fm2 
+                fm2 = fm2 - fm1 
+            else :
+                return i 
+        if(data[n-1] == key )   :
+            return n-1 
+        else :
+            return -1                      
+
 
 # <-------------------------------------------------------->           
 # main logic start here , the code is menu driven   

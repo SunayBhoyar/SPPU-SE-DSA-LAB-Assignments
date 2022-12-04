@@ -1,55 +1,87 @@
 #include <iostream>
 #include<stdlib.h>
 using namespace std;
-class node
-{
-public:
-  node * next;
-  node *prev;
-  int seat;
-  string id;
-  int status;
-};
-class cinemax
-{
-public:
-  node * head, *tail, *temp;
-  cinemax ()
-  {
-    head = NULL;
-  }
-  void create_list ();
-  void display ();
-  void book ();
-  void cancel ();
-  void avail ();
-
+class node {
+  public:
+    node * next;
+    node *prev;
+    int seat;
+    string id;
+    int status;
 };
 
-void
-cinemax::create_list ()
-{
-  int i = 1;
-  temp = new node;
-  temp->seat = 1;
-  temp->status = 0;
-  temp->id = "null";
-  tail = head = temp;
-  for (int i = 2; i <= 70; i++)
+class cinemax {
+  public:
+    node * head, *tail, *temp;
+    cinemax ()
     {
-      node *p;
-      p = new node;
-      p->seat = i;
-      p->status = 0;
-      p->id = "null";
-      tail->next = p;
-      p->prev = tail;
-      tail = p;
-      tail->next = head;
-      head->prev = tail;
-
+      head = NULL;
     }
-}
+    void create_list (){
+      int i = 1;
+      temp = new node;
+      temp->seat = 1;
+      temp->status = 0;
+      temp->id = "null";
+      tail = head = temp;
+      for (int i = 2; i <= 70; i++){
+          node *p;
+          p = new node;
+          p->seat = i;
+          p->status = 0;
+          p->id = "null";
+          tail->next = p;
+          p->prev = tail;
+          tail = p;
+          tail->next = head;
+          head->prev = tail;
+
+        }
+    }
+    void display (){
+      {
+        int r = 1;
+        node *temp;
+        temp = head;
+        int count = 0;
+        cout <<
+          "\n------------------------------------------------------------------------------------\n";
+        cout << " Screen this way \n";
+        cout <<
+          "------------------------------------------------------------------------------------\n";
+        while (temp->next != head)
+          {
+            if (temp->seat / 10 == 0)
+              cout << "S0" << temp->seat << " :";
+            else
+              cout << "S" << temp->seat << " :";
+
+            if (temp->status == 0)
+              cout << "|___| ";
+            else
+              cout << "|_B_| ";
+            count++;
+            if (count % 7 == 0)
+              {
+                cout << endl;
+                r++;
+              }
+            temp = temp->next;
+                }
+              cout << "S" << temp->seat << " :";
+              if (temp->status == 0)
+                cout << "|___| ";
+              else
+                cout << "|_B_| ";
+            }
+    }
+    void book ();
+    void cancel ();
+    void avail ();
+
+};
+
+
 
 void
 cinemax::display ()

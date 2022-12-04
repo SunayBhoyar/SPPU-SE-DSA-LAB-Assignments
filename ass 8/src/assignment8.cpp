@@ -111,6 +111,7 @@ public:
   }
 
   void Intersection(LinkedList l1 ,LinkedList l2){
+      cout<<endl ;
 	  LinkedList temp ;
 	  Node *temp_ptr = l2.Start ;
 	  while(temp_ptr != NULL){
@@ -119,7 +120,16 @@ public:
 		  }
 		  temp_ptr = temp_ptr ->next ;
 	  }
-	  temp.display_all();
+	  LinkedList temp2 ; 
+	  temp_ptr = temp.Start ;
+
+	  while(temp_ptr != NULL){
+		  if(l1.search(temp_ptr->val) != -1){
+		      temp2.insert_end(temp_ptr ->val);
+		  }
+		  temp_ptr = temp_ptr ->next ;
+	  }
+	  temp2.display_all();
   }
 
   void Symdiffreence(LinkedList l1 ,LinkedList l2){
@@ -132,14 +142,14 @@ public:
 	  		  temp_ptr = temp_ptr ->next ;
 	  	  }
   	  LinkedList temp2 ;
-  	  Node *temp_ptr = l1.Start ;
+  	  temp_ptr = l1.Start ;
   	  while(temp_ptr != NULL){
   		  if(temp.search(temp_ptr->val) == -1){
   			  temp2.insert_end(temp_ptr ->val);
   		  }
   		  temp_ptr = temp_ptr ->next ;
   	  }
-  	  Node *temp_ptr = l2.Start ;
+  	  temp_ptr = l2.Start ;
   	  	  while(temp_ptr != NULL){
   	  		  if(temp.search(temp_ptr->val) == -1){
   	  			  temp2.insert_end(temp_ptr ->val);
@@ -148,40 +158,35 @@ public:
   	  	  }
   	  temp2.display_all();
     }
-  void diffreence(LinkedList l1 ,LinkedList l2){
-  	  LinkedList temp ;
-  	  	  Node *temp_ptr = l2.Start ;
-  	  	  while(temp_ptr != NULL){
-  	  		  if(l1.search(temp_ptr->val) != -1){
-  	  			  temp.insert_end(temp_ptr ->val);
-  	  		  }
-  	  		  temp_ptr = temp_ptr ->next ;
-  	  	  }
-    	  LinkedList temp2 ;
-    	  Node *temp_ptr = l1.Start ;
-    	  while(temp_ptr != NULL){
-    		  if(temp.search(temp_ptr->val) == -1){
-    			  temp2.insert_end(temp_ptr ->val);
-    		  }
-    		  temp_ptr = temp_ptr ->next ;
-    	  }
-    	  temp2.display_all();
-      }
 };
 
 int main(){
 	LinkedList obj ,obj2,obj3 ;
 	obj.insert_end(10);
 	obj.insert_end(20);
+	obj.insert_end(30);
 	obj2.insert_end(30);
 	obj2.insert_end(40);
-	obj.insert_end(30);
-	obj.display_all();
-	cout<<endl;
-	obj2.display_all();
-	cout<<endl ;
-	obj3.Union(obj,obj2);
-	obj3.Intersection(obj,obj2);
 
+	while(1>0){
+		int menu  ; 
+		cout<<"1)students who like both ice cream\n2)students who like either but not both\nstudents who like \n0)Exit";
+		cin >> menu ;
+		if(menu == 0 ){
+			break ;
+		}
+		else if(menu == 1){
+			obj.Union(obj,obj2);
+		}
+		else if(menu == 2){
+			obj.Symdiffreence(obj,obj2);
+		}
+		else if(menu == 3){
+			cout<< 0 ;
+		}
+		else {
+			cout<<"enter valid number"<<endl;
+		}
+	}
 	return 1;
 }

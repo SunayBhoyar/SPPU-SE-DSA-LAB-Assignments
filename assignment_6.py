@@ -14,30 +14,29 @@ class operations :
     #<------------------------------------------>    
     
     # this is main quick sort function
-    def quick_sort (self,arr,start,end):
-        while(start < end ):                            # this is base condition
-            res = self.piv_shift(arr, start, end)       # pivot shifting takes place here
-            arr = res[0]                                # old array is replace by modified one
-            pivloc = res[1]                             # it stores the pivot location
-            self.quick_sort(arr, pivloc +1 , end)       # quick sort further part of the array
-            self.quick_sort(arr, start, pivloc -1 )     # quick start behind part
-            break                                       # end condition
-        return arr                                      # return the sorted array
+    def quick_sort (self,arr,low,high):
+        if(len(arr) == 1):
+            return arr
+        if(low<high):
+            piv = self.piv_shift(arr,low,high)  
+            self.quick_sort(arr,low,piv -1)
+            self.quick_sort(arr,piv+1,high)                   
+        return arr                                     
 
     #<------------------------------------------>   
     
         
     # this is pivot shifter function
-    def piv_shift (self,arr,start,end):
-        pivot = arr[start]                              # we select the first element of the list is pivot
-        inc = 0                                         # this data is used to mark the location
-        for j in range(start+1,end):                    # we check for all element leaving first
-            if(pivot>arr[j]):
-                arr.insert(start,arr[j])
-                arr.pop(j+1)
-                inc+=1
-        return [arr,start+inc] 
-    
+    def piv_shift (self,arr,low,high):
+        i = low - 1
+        pivot = arr[high]
+        for j in range(low,high):
+            if(arr[j] <= pivot): 
+                i  = i + 1
+                arr[i] , arr[j] = arr[j] , arr[i]
+        arr[i+1] , arr[high] = arr[high] , arr[i+1]
+        return i + 1    
+
     #<------------------------------------------>   
     
     
